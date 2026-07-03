@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 // prototypes
-
 void uppercase(char lowercase[], char buffer[]);
 
 int main(void)
