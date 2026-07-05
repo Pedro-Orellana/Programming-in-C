@@ -12,6 +12,8 @@ int main() {
     print_binary(30, true);
     print_binary(30, false);
 
+    bitpat_search(30, 30,8);
+
     return 0;
 }
 
@@ -43,5 +45,23 @@ void print_binary(unsigned int word, bool show_trailing_zeroes) {
     }
 
     printf("\n");
+}
+
+u_int8_t bitpat_search(unsigned int source, unsigned int pattern, u_int8_t n) {
+    u_int8_t pattern_bits [n];
+
+    //pattern extraction and saved into an array
+    for(int8_t i  = 0; i < n; i ++) {
+        u_int8_t current_bit = (pattern >> i) & 1;
+        pattern_bits[i] = current_bit;
+    }
+
+    //testing
+    for(int8_t i = 0; i < n; i ++) {
+        printf("%d", pattern_bits[i]);
+    }
+    printf("\n");
+
+    return 0;
 }
 
