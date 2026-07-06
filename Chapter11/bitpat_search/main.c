@@ -4,6 +4,7 @@
 
 //prototypes
 int8_t bitpat_search(unsigned int source, unsigned int pattern, u_int8_t n);
+int8_t better_bitpat_search(unsigned int source, unsigned int pattern, u_int8_t n);
 void print_binary(unsigned int word, bool show_trailing_zeroes);
 
 int main() {
@@ -13,7 +14,9 @@ int main() {
     print_binary(30, false);
 
     int8_t answer = bitpat_search(30, 30,8);
-    printf("Answer should be 24. Answer: %d", answer);
+    int8_t better_answer = better_bitpat_search(30, 30, 8);
+    printf("Answer should be 24. Answer: %d\n", answer);
+    printf("Better answer should be 24. Answer: %d\n", better_answer);
 
     return 0;
 }
@@ -85,4 +88,29 @@ int8_t bitpat_search(unsigned int source, unsigned int pattern, u_int8_t n) {
 
     return answer;
 }
+
+
+int8_t better_bitpat_search(unsigned int source, unsigned int pattern, u_int8_t n) {
+
+    int8_t num_bits_source = sizeof(source) * 8;
+    int8_t answer = -1;
+
+    //extracting the rightmost n bits from pattern
+    unsigned int mask = (1U << n) - 1;
+    //getting the real pattern and asssigning to pattern
+    pattern &= mask;
+    //pattern &= mask;
+
+    for(int8_t i = (num_bits_source - n); i >= 0; i--) {
+        unsigned int source_test = (source >> i) & mask;
+        if(source_test == pattern) {
+            return (num_bits_source - i - n);
+        }
+    }
+
+    return answer;
+}
+
+
+
 
